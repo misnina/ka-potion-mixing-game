@@ -9,7 +9,7 @@ class Ingredient {
 
 /* Ingredients */
 
-const woolsworth = new Ingredient(1, 'Woolsworth', COLORS.white, 1);
+const woolsworth = new Ingredient(1, 'Woolsworth', COLORS.orange, 1);
 const breth = new Ingredient(2, 'Breth', COLORS.yellow , 3);
 const dragonEgg = new Ingredient(3, 'Dragon Egg', COLORS.green, 5);
 const zoraScale = new Ingredient(4, 'Zora Scale', COLORS.blueGreen, 3);

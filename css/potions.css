@@ -1,0 +1,254 @@
+:root {
+  --bottle-color: lightgrey;
+  --shine-color: white;
+}
+
+.potion-container {
+  margin: auto;
+  max-width: 500px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: space-around;
+}
+
+.potion {
+  background-color:white;
+  position: relative;
+  height: 60px;
+  width: 60px;
+
+  margin: 5px;
+  content:"";
+}
+
+/* POTION LIQUID */
+
+.potion-liquid,
+.potion-liquid-shine,
+.potion-liquid-shadow {
+  position: absolute;
+}
+
+
+.potion-liquid {
+  height: 30px;
+  width: 52px;
+
+  top: 25px;
+  left: 4px;
+
+  border-radius: 30px 30px 15px 15px;
+}
+
+.potion-liquid-shine {  
+  width: 20px;
+  height: 10px;
+
+  border: 0 solid transparent;
+  border-top: 3px solid var(--shine-color);
+  border-radius: 15px 10px 0 0;
+
+  top: 5px;
+  left: 5px;
+
+  transform: rotate(-20deg);
+}
+
+.potion-liquid-shadow {
+  height: 10px;
+  width: 40px;
+
+  border-radius: 40px 40px 20px 20px;
+
+  top: 19px;
+  left: 7px;
+}
+
+/* BOTTLE BASE */
+
+
+.potion-bottle-top,
+.potion-bottle-stem,
+.potion-bottle-base {
+  background-color: var(--bottle-color);
+  position: absolute;
+}
+
+.potion-bottle-top {
+  height: 10px;
+  width: 30px;
+
+  left: 14px;
+  border-radius: 5px;
+
+}
+
+.potion-bottle-top::after {
+  position: absolute;
+  
+  content: "";
+  width: 28px;
+  height: 3px;
+
+  border: 0 solid transparent;
+  border-top: 2px solid var(--shine-color);
+  border-radius: 15px 10px 0 0;
+
+  top: 2px;
+  left: 1px;
+
+  transform: rotate(0deg);
+}
+
+.potion-bottle-stem {
+  height: 20px;
+  width: 15px;
+
+  top: 10px;
+  left: 22px;
+}
+
+.potion-bottle-base {
+  height: 40px;
+  width: 60px;
+
+  top: 20px;
+
+  border-radius: 25px 25px 15px 15px;
+}
+
+/* GENERAL ANIMATIONS */
+
+.bubble {
+  position: absolute;
+  
+  opacity: 0;
+
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+
+  top: 19px;
+  left: 10px;
+
+  animation-name: bubble1;
+  animation-delay: 1s;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+/* ANIMATIONS */
+
+@keyframes bubble1 {
+  0% {
+    opacity: 0;
+
+    top: 20px;
+    left: 20px;
+  }
+
+  25% {
+    opacity: 0.50;
+
+    top: 12px;
+    left: 22px;
+  }
+
+  50% {
+    opactity: 0.25;
+
+    top: 8px;
+    left: 20px;
+  }
+
+  75% {
+    opacity: 0.10;
+
+    top: 4px;
+    left: 22px;
+  }
+
+  100% {
+    opacity: 0;
+
+    top: 2px;
+    left: 20px;
+  }
+}
+
+@keyframes bubble2 {
+  0% {
+    opacity: 0;
+
+    top: 20px;
+    left: 12px;
+  }
+
+  25% {
+    opacity: 0.50;
+
+    top: 12px;
+    left: 8px;
+  }
+
+  50% {
+    opactity: 0.25;
+
+    top: 8px;
+    left: 12px;
+  }
+
+  75% {
+    opacity: 0.10;
+
+    top: 4px;
+    left: 8px;
+  }
+
+  100% {
+    opacity: 0;
+
+    top: 2px;
+    left: 12px;
+  }
+}
+
+@keyframes bubble3 {
+  0% {
+    opacity: 0;
+
+    top: 20px;
+    left: 28px;
+  }
+
+  25% {
+    opacity: 0.50;
+
+    top: 12px;
+    left: 36px;
+  }
+
+  50% {
+    opactity: 0.25;
+
+    top: 8px;
+    left: 38px;
+  }
+
+  75% {
+    opacity: 0.10;
+
+    top: 4px;
+    left: 36px;
+  }
+
+  100% {
+    opacity: 0;
+
+    top: 2px;
+    left: 38px;
+  }
+}

@@ -7,7 +7,11 @@ class Potion {
   }
 
   get name() {
-    return `${namedPotency()} ${this.color.charAt(0).toUpperCase()} Potion`
+    return `${namedPotency()} ${this.color.charAt(0).toUpperCase()} Potion`;
+  }
+
+  get idTag() {
+    return `${uuid}-${namedPotency()}-${this.color}`;
   }
 
   namedPotency() {
@@ -26,10 +30,80 @@ class Potion {
   }
 }
 
-const testPotion = new Potion(1, COLORS.yellowGreen, 5);
+function createPotion(reactants, uuid) {
+  return new Potion(uuid, generateColor(reactants), generatePotency(reactants));
+}
 
-console.log(generateColor([testPotion, cirtBerry, cirtBerry, cirtBerry]));
+/* RENDERING POTIONS */
 
-function createPotion(reactants) {
+const BUBBLE_ANIMATIONS = [
+  'bubble1',
+  'bubble2',
+  'bubble3',
+];
+
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function renderPotionEle(potion) {
+  const pot = document.createElement('div');
+  pot.classList.add('potion');
+  const potBotTop = document.createElement('span');
+  potBotTop.classList.add('potion-bottle-top');
+  const potBotStem = document.createElement('span');
+  potBotStem.classList.add('potion-bottle-stem');
+  const potBotBase = document.createElement('span');
+  potBotBase.classList.add('potion-bottle-base');
+
+  pot.appendChild(potBotTop);
+  pot.appendChild(potBotStem);
+  pot.appendChild(potBotBase);
+
+  const potionuuid = document.createElement('span');
+  potionuuid.setAttribute('id', `p-${potion.uuid}`);
+  const potionLiq = document.createElement('span');
+  potionLiq.classList.add('potion-liquid');
+  potionLiq.style.backgroundColor = potion.color.basehex;
+  const potLiqShadow = document.createElement('span');
+  potLiqShadow.classList.add('potion-liquid-shadow');
+  potLiqShadow.style.backgroundColor = potion.color.shadowhex;
+  const bubbleContainer = document.createElement('span');
+  bubbleContainer.classList.add('bubble-container');
+  const potLiqShine = document.createElement('potion-liquid-shine');
+  potLiqShine.classList.add('potion-liquid-shine');
+
+  const randBubbleCount = randomNumber(1, 6);
+  for (let j = 0; j <= randBubbleCount; j++) {
+    const randDelay = `${randomNumber(1, 3)}s`;
+    const randDuration = `${randomNumber(2, 4)}s`;
+    const randDimension = `${randomNumber(4, 10)}px`;
+
+    const randVertical = randomNumber(3, 12);
+
+    let newBubble = document.createElement('div');
+    newBubble.className = 'bubble';
+
+    newBubble.style.backgroundColor = potion.color.shadowhex;
+    newBubble.style.width = randDimension;
+    newBubble.style.height = randDimension;
+
+    newBubble.style.animationDelay = randDelay;
+    newBubble.style.animationDuration = randDuration;
+
+    newBubble.style.right = randVertical;
+
+    newBubble.style.animationName = BUBBLE_ANIMATIONS[randomNumber(0, BUBBLE_ANIMATIONS.length - 1)];
+
+    bubbleContainer.appendChild(newBubble);
+  }
+
+  potionLiq.appendChild(potLiqShadow);
+  potionLiq.appendChild(bubbleContainer);
+  potionLiq.appendChild(potLiqShine);
   
+  potionuuid.appendChild(potionLiq);
+  pot.appendChild(potionuuid);
+
+  return pot;
 }

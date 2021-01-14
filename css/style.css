@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@300;800&family=Fredoka+One&display=swap');
+
+
+body, html {
+  font-family: 'Dosis', sans-serif;
+  text-align: center;
+  margin: 0;
+}
+
+body {
+  padding: 10px;
+  padding-top: 0px;
+}
+
+header {
+  max-width: 700px;
+  margin: auto;
+  padding: 15px;
+}
+
+h1, h2, h3 {
+  margin: 0;
+  padding: 0;
+  font-family: 'Fredoka One', cursive;
+}
+
+#ingredients h2,
+#potions h2,
+#message
+{
+  margin: 1vw;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  right: 0;
+
+  height: 100%;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.5);
+
+  justify-content: center;
+  align-items: center;
+}
+
+#information {
+  display: none;
+  position: fixed;
+  z-index: 1;
+
+  width: 300px;
+  height: 200px;
+  padding: 10px;
+  margin: auto;
+
+  font-size: 16px;
+  text-align: left;
+
+  border: 2px solid black;
+  background: white;
+}
+
+#information h3 {
+  margin: 0;
+  padding: 0;
+}
+
+#information .label {
+  font-weight: bold;
+}
+
+#actions button {
+  border: 0;
+  margin: 5px;
+  padding: 10px;
+  font-size: 16px;
+  font-family: 'Fredoka One', cursive;
+  
+  border-radius: 5px;
+
+  cursor: pointer;
+
+}
+
+#ingredient-container {
+  margin: auto;
+  max-width: 720px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: space-around;
+}
+
+.ingredient {
+  color: white;
+  height: 30px;
+  width: 30px;
+  margin: 2px;
+}
+
+.ingredient .badge {
+  height: 15px;
+  width: 15px;
+  font-size: 14px;
+  font-weight: 800;
+
+  -webkit-text-stroke: 1px black;
+}
+
+/* BIGGER SCREEN */
+@media(min-width: 500px) {
+  .ingredient {
+    height: 50px;
+    width: 50px;
+    margin: 5px;
+  }
+
+  .ingredient .badge {
+    height: 30px;
+    width: 30px;
+    font-size: 22px;
+    font-weight: 800;
+
+    -webkit-text-stroke: 1px black;
+  }
+
+  #information {
+    width: 500px;
+    height: 300px;
+    padding: 10px;
+    margin: 10px;
+    font-size: 20px;
+  
+    text-align: left;
+    border: 2px solid black;
+  }
+  
+  #information h3 {
+    margin: 0;
+    padding: 0;
+  }
+  
+  #information .label {
+    font-weight: bold;
+  }
+  
+}

@@ -3,14 +3,14 @@
   --shine-color: white;
 }
 
-.potion-container {
+#potion-container {
   margin: auto;
-  max-width: 500px;
+  max-width: 700px;
 
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  align-items: space-around;
+  align-content: space-around;
 }
 
 .potion {
@@ -21,6 +21,7 @@
 
   margin: 5px;
   content:"";
+  text-align: left;
 }
 
 /* POTION LIQUID */
@@ -138,6 +139,20 @@
   animation-duration: 2s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
+}
+
+/* MOBILE */
+
+@media(max-width: 500px) {
+  #potion-container {
+    max-height: 300px;
+    overflow-x: none;
+    overflow-y: scroll;
+  }
+  #potion-container .potion {
+    transform: scale(0.6);
+    margin: -6px;
+  }
 }
 
 /* ANIMATIONS */

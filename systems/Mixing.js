@@ -11,8 +11,8 @@ class Color {
 }
 
 const white = new Color('white', 4, [], '#ebf2f2', '#b8bfbf');
-const black = new Color('black', 5, [], '#453a42', '#1c1a1b');
-const brown = new Color('brown', 5, [], '#73462a', '#452924');
+const black = new Color('black', 1, [], '#453a42', '#1c1a1b');
+const brown = new Color('brown', 1, [], '#73462a', '#452924');
 
 const red = new Color('red', 3, [], '#e31235', '#8f136e');
 const yellow = new Color('yellow', 3, [], '#e3d966', '#c28917');
@@ -56,35 +56,25 @@ function generateColor(reactants) {
 
   let baseColors = [];
   reactants.map(reactant => {
-    baseColors.push(reactant.color);
+    for (let i = 0; i < reactant.potency; i++) {
+      baseColors.push(reactant.color);
+    }
   });
-
-  //TODO generate more colors based on potency of reactant
 
   let weightedColors = [];
   baseColors.map(color => {
     if (color.contains.length !== 0) {
       color.contains.map(innerColor => {
-        weightedColors.push(innerColor);
+        if (innerColor.contains.length !== 0) {
+          innerColor.contains.map(superColor => {
+            weightedColors.push(superColor);
+          })
+        } else {
+          weightedColors.push(innerColor);
+        }
       });
     } else {
       weightedColors.push(color);
-    }
-  });
-
-  /* BROWN OR BLACK */
-
-  let brownCount = 0;
-  let blackCount = 0;
-  let pureColors = [];
-
-  weightedColors.map(color => {
-    if (color === brown) {
-      brownCount++; 
-    } else if (color === black) {
-      blackCount++;
-    } else {
-      pureColors.push(color);
     }
   });
 
@@ -92,20 +82,6 @@ function generateColor(reactants) {
     return (amount / total) * 100;
   }
 
-  if (
-    percentage(
-      brownCount + blackCount,
-      weightedColors.length)
-    > 20)
-  {
-    if (brownCount > (blackCount + 1)) {
-      return COLORS.brown;
-    } else {
-      return COLORS.black;
-    }
-  }
-
-  // TODO if too many different colors and not a strong amount of another color, generate brown
 
   /* SELECT COLOR POOL */
 
@@ -113,26 +89,58 @@ function generateColor(reactants) {
     return Math.floor(Math.random() * 100);
   }
 
-  const orderedPure = pureColors.sort((a, b) => {
+  const orderedPure = weightedColors.sort((a, b) => {
     return a.purity + b.purity;
   });
 
   let colorPool = [];
 
   // By chance, weighted by purity, giving more possibility to least pure, possibility to pick a new color
-  orderedPure.some(color => {
+  orderedPure.map(color => {
     const rand = randPercent();
-    if (colorPool.length > 3) { return false } 
+    if (colorPool.length > 3) { return false }
     if (rand > percentage(color.purity, 5)) {
-      colorPool.push[color]
+      colorPool.push(color);
     }
   });
 
-  /* MIX COLOR POOL */
-  // TODO This is complicated...
+  if (colorPool.length === 0) { colorPool.push(orderedPure[0])};
 
-  //Random from color pool from now
-  return pureColors[Math.floor(Math.random() * pureColors.length)];
+
+  /* MIX COLOR POOL */
+  //initalizing color, if color is not mixed
+  let finalColor = colorPool[Math.floor(Math.random() * colorPool.length)];
+
+  for (const color in COLORS) {
+    const c = COLORS[color];
+    let canDoChance = false;
+
+    if (c.contains.length !== 0) {
+      canDoChance = c.contains.every(innerColor => {
+        if (innerColor.contains.length !== 0) {
+          return innerColor.contains.every(superColor => {
+            return colorPool.includes(superColor);
+          })
+        } else {
+          return colorPool.includes(innerColor);
+        }
+      })
+    }
+    else {
+      canDoChance = colorPool.includes(c);
+    }
+
+    const rand = randPercent();
+    if (canDoChance && c.purity === 1 && rand > 20) {
+      finalColor = c;
+    } else if (canDoChance && c.purity === 2 && rand > 40) {
+      finalColor = c
+    } else if (canDoChance && rand > 95) {
+      finalColor = c;
+    }
+  }
+
+  return finalColor;
 }
 
 

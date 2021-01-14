@@ -10,9 +10,44 @@
   </head>
   <body>
   
-    <div class='potion-container'>
-
+    <div class="modal">
+      <div id="information">
+        <h3 id="title">Title</h3>
+        <div id="description">
+          <span class="label">Description:</span>
+          <span class="text-span">ed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.t</span>
+        </div>
+        <div id="effect">
+          <span class="label">Effect:</span>
+          <span class="text-span">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam,</span>
+        </div>
+      </div>
     </div>
+
+    <header>
+      <h1>Sorcery Brew</h1>
+      <h3 id="rules">Forage for materials and then create potions!</h3>
+    </header>
+
+    <div id="message">Grab items or brew.</div>
+    <div id="actions">
+      <button id="forage">Forage</button>
+      <button id="brew">Brew</button>
+      <button id="modal-button">Open Modal</button>
+    </div>
+
+    <div id="ingredients">
+      <h2>Ingredients</h2>
+      <div id="ingredient-container"></div>
+    </div>
+
+    <div id="potions">
+      <h2>Potions</h2>
+      <div id='potion-container'></div>
+    </div>
+
+
+
     <script src="./systems/Mixing.js"></script>
     <script src="./systems/Ingredient.js"></script>
     <script src="./systems/Potion.js"></script>
